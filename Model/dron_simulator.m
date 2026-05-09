@@ -20,7 +20,7 @@ alpha = dt / (tau_motor + dt); % Constante de filtro para los motores
 beta = 0.1;       % Peso para el filtro de sensores MME
 
 % VARIABLES DE ESTADO INICIALES
-x = 0; y = 0; z = 10;             % Posición inicial
+x = 0; y = 0; z = 0;             % Posición inicial
 vx = 0; vy = 0; vz = 0;           % Velocidades lineales
 phi = 0; theta = 0; psi = 0;      % Ángulos de Euler (Roll, Pitch, Yaw)
 p = 0; q = 0; r = 0;              % Velocidades angulares
@@ -31,17 +31,23 @@ U1_real = masa_dron * a_gravedad; % Empuje inicial
 % CONSTANTES DE LOS CONTROLADORES PID
 % PID Altitud (Z)
 z_ref  = 5;
-kp_z = 3; ki_z = 0; kd_z = 4;
+kp_z = 6; ki_z = 0; kd_z = 5.5;
 err_z_acumulado = 0; err_z_previo = 0;
 
 % PIDs de Navegación (X e Y)
 x_ref = 5;
 y_ref = 5;
-kp_xy = 0.1; ki_xy = 0; kd_xy = 0.25;
+kp_xy = 0.04; ki_xy = 0; kd_xy = 0.4;
 err_x_acumulado = 0; err_x_previo = 0;
 err_y_acumulado = 0; err_y_previo = 0;
 
-angulo_max = 0.5; % Saturación: Límite de inclinación en radianes (~28 grados)
+% PIDs de Actitud
+kp_att = 2.5; ki_att = 0; kd_att = 0.3;
+err_phi_acum = 0;   err_phi_prev = 0;
+err_theta_acum = 0; err_theta_prev = 0;
+err_psi_acum = 0;   err_psi_prev = 0;
+
+angulo_max = 0.3; % Saturación: Límite de inclinación en radianes (~28 grados)
 
 % VECTORES DE TELEMETRÍA
 hist_t          = zeros(1, N);
@@ -90,20 +96,46 @@ for i = 1 : N
   if phi_deseado > angulo_max; phi_deseado = angulo_max;
   elseif phi_deseado < -angulo_max; phi_deseado = -angulo_max; end
 
-  % Asumimos que el dron rota mágicamente e instantáneamente a los ángulos deseados.
-  theta = theta_deseado;
-  phi = phi_deseado;
-  psi = 0;
+  % LAZO INTERNO
+
+  % PID de Roll (Alabeo)
+  err_phi = phi_deseado - phi;
+  err_phi_acum = err_phi_acum + err_phi * dt;
+  vel_err_phi = (err_phi - err_phi_prev) / dt;
+  U2 = kp_att * err_phi + err_phi_acum * ki_att + vel_err_phi * kd_att;
+  err_phi_prev = err_phi;
+
+  % PID de Pitch (Cabeceo)
+  err_theta = theta_deseado - theta;
+  err_theta_acum = err_theta_acum + err_theta * dt;
+  vel_err_theta = (err_theta - err_theta_prev) / dt;
+  U3 = kp_att * err_theta + err_theta_acum * ki_att + vel_err_theta * kd_att;
+  err_theta_prev = err_theta;
+
+  % PID de Yaw (Guiñada)
+  err_psi = 0 - psi;
+  err_psi_acum = err_psi_acum + err_psi * dt;
+  vel_err_psi = (err_psi - err_psi_prev) / dt;
+  U4 = kp_att * err_psi + err_psi_acum * ki_att + vel_err_psi * kd_att;
+  err_psi_prev = err_psi;
 
   % ACTUADORES (Fuerza Z)
   U1_deseado = (masa_dron * a_gravedad) + fuerza_pid;
 
   if U1_deseado <= 0; U1_deseado = 0;
-  elseif U1_deseado > 2 * masa_dron * a_gravedad; U1_deseado = 2 * masa_dron * a_gravedad; end
+  elseif U1_deseado > 3 * masa_dron * a_gravedad; U1_deseado = 3 * masa_dron * a_gravedad; end
 
   U1_real = U1_real + alpha * (U1_deseado - U1_real);
 
   % DINÁMICA FÍSICA Y CINEMÁTICA
+  dp = (U2 + (inercia_yy - inercia_zz) * q * r) / inercia_xx;
+  dq = (U3 + (inercia_zz - inercia_xx) * p * r) / inercia_yy;
+  dr = (U4 + (inercia_xx - inercia_yy) * p * q) / inercia_zz;
+
+  dphi = p + q * sin(phi) * tan(theta) + r * cos(phi) * tan(theta);
+  dtheta = q * cos(phi) - r * sin(phi);
+  dpsi = q * sin(phi) / cos(theta) + r * cos(phi) / cos(theta);
+
   ax = (U1_real / masa_dron) * (cos(phi) * sin(theta) * cos(psi) + sin(phi) * sin(psi)) - (f_aero_lin / masa_dron) * vx;
   ay = (U1_real / masa_dron) * (cos(phi) * sin(theta) * sin(psi) - sin(phi) * cos(psi)) - (f_aero_lin / masa_dron) * vy;
   az = (U1_real / masa_dron) * (cos(phi) * cos(theta)) - a_gravedad - (f_aero_lin / masa_dron) * vz;
@@ -117,6 +149,15 @@ for i = 1 : N
   z = z + vz * dt;
 
   if z <= 0; z = 0; vz = 0; end
+
+  p = p + dp * dt;
+  q = q + dq * dt;
+  r = r + dr * dt;
+
+  % Actualizar ángulos reales en el espacio
+  phi = phi + dphi * dt;
+  theta = theta + dtheta * dt;
+  psi = psi + dpsi * dt;
 
   % GUARDAR TELEMETRÍA
   hist_t(i)          = i * dt;
