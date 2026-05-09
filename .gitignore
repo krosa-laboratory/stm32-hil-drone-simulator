@@ -1,0 +1,33 @@
+# =========================
+# GNU Octave / MATLAB
+# =========================
+*.mat
+*.asv
+octave-workspace
+*.slxc
+
+# =========================
+# STM32CubeIDE / C / C++
+# =========================
+# Ignorar carpetas de compilación
+firmware/**/Debug/
+firmware/**/Release/
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+*.list
+
+# Ignorar archivos ocultos y temporales del IDE de ST
+.metadata/
+.settings/
+*.launch
+*.ioc.bak
+.mxproject
+
+# =========================
+# OS generados
+# =========================
+.DS_Store
+Thumbs.db
