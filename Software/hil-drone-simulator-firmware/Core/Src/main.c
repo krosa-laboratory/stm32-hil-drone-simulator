@@ -83,6 +83,7 @@ TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN PV */
 Drone_t drone;
+volatile uint8_t received_command = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -171,7 +172,21 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	// ENVIO DE INFORMACIÓN POR USB AL PC
+
+	// RECEPCIÓN DE COMANDO POR USB DESDE EL PC
+	if (received_command != 0) {
+	  switch(received_command) {
+	    case 'w': case 'W': drone.x_ref += 2.0f; break; // Adelante
+	    case 's': case 'S': drone.x_ref -= 2.0f; break; // Atrás
+	    case 'a': case 'A': drone.y_ref += 2.0f; break; // Izquierda
+	    case 'd': case 'D': drone.y_ref -= 2.0f; break; // Derecha
+	    case 'r': case 'R': drone.z_ref += 2.0f; break; // Subir (Elevar)
+	    case 'f': case 'F': drone.z_ref -= 2.0f; break; // Bajar (Frenar)
+	  }
+	  received_command = 0;
+	}
+
+    // ENVIO DE INFORMACIÓN POR USB AL PC
 	// Creamos buffer para guardar el mensaje
 	char tx_buffer[64];
 	// Formateamos las variables float a texto con 2 decimales
