@@ -1,0 +1,5 @@
+../Drivers/CMSIS/Include/core_cm4.h:1679:22:__NVIC_EnableIRQ	2
+../Drivers/CMSIS/Include/core_cm4.h:1809:22:__NVIC_SetPriority	2
+../Core/Src/hardware.c:10:6:Hardware_Init	1
+../Core/Src/hardware.c:20:6:TIM2_Init	1
+../Core/Src/hardware.c:55:6:TIM6_Init	1
