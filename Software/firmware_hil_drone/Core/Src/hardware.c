@@ -68,4 +68,14 @@ void TIM6_Init(void)
 
 }
 
+void Hardware_SetMotors(uint32_t m1, uint32_t m2, uint32_t m3, uint32_t m4)
+{
+
+	TIM2->CCR1 = m1;
+	TIM2->CCR2 = m2;
+	TIM2->CCR3 = m3;
+	TIM2->CCR4 = m4;
+
+}
+
 
