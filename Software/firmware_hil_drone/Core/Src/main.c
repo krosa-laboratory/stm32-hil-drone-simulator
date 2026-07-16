@@ -44,6 +44,18 @@
 
 /* USER CODE BEGIN PV */
 
+// Real state variables
+float actual_z 	   = 0.0f;
+float actual_roll  = 0.0f;
+float actual_pitch = 0.0f;
+float actual_yaw   = 0.0f;
+
+// Reference variables
+float desired_z     = 5.0f;
+float desired_roll  = 0.0f;
+float desired_pitch = 0.0f;
+float desired_yaw   = 0.0f;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -90,15 +102,24 @@ int main(void)
   MX_USB_Device_Init();
   /* USER CODE BEGIN 2 */
 
+  Control_Init(); // Prepare memory and maths before hardware IMPORTANT!
+  Hardware_Init(); // Turn on motors and system heartbeat
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+      /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+	  // Read USB received commands
+	  // USB_Process_Data();
+
+	  // Send telemetry to USB
+	  // printf("Z: %.2f | R: %.2f | P: %.2f\n", actual_z, actual_roll, actual_pitch);
+
+	  /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
