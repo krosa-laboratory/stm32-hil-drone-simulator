@@ -12,7 +12,7 @@ DroneConfig_t config;
 void Config_LoadStatus(void)
 {
 	config.weight_kg     = 1.2f;
-	config.xx_intertia   = 0.015f;
+	config.xx_inertia    = 0.015f;
 	config.yy_inertia    = 0.015f;
 	config.zz_inertia    = 0.025f;
 	config.k_pwm	     = 28.5f;

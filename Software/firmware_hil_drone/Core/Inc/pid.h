@@ -23,7 +23,7 @@ typedef struct {
 	// Security limit
 	float output_limit;
 
-}; PID_Controller_t;
+} PID_Controller_t;
 
 void PID_Init(PID_Controller_t* pid, float kp, float ki, float kd, float limit);
 float PID_Compute(PID_Controller_t* pid, float setpoint, float measure, float dt);

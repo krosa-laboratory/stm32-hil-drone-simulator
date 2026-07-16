@@ -16,7 +16,7 @@
 // Flight params (Adjustables in real time)
 typedef struct {
 	float weight_kg;	 // Total Drone weight in kilograms
-	float xx_intertia;	 // Roll moment of inertia
+	float xx_inertia;	 // Roll moment of inertia
 	float yy_inertia;	 // Pitch moment of inertia
 	float zz_inertia;	 // Yaw moment of inertia
 	float k_pwm;		 // Conversion factor Newtons -> Ticks PWM
@@ -24,6 +24,6 @@ typedef struct {
 } DroneConfig_t;
 
 // Global variable with the active configuration
-extern DronConfig_t config;
+extern DroneConfig_t config;
 
 #endif /* INC_CONFIG_H_ */

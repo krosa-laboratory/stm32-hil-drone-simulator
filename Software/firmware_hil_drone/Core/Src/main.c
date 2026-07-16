@@ -23,6 +23,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "config.h"
+#include "control.h"
+#include "hardware.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

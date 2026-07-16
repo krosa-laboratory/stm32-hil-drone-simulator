@@ -13,7 +13,7 @@ void PID_Init(PID_Controller_t* pid, float kp, float ki, float kd, float limit)
 	pid->kp = kp;
 	pid->ki = ki;
 	pid->kd = kd;
-	pid.accumulative_error = 0.0f;
+	pid->accumulated_error = 0.0f;
 	pid->previous_error = 0.0f;
 	pid->output_limit = limit;
 
@@ -27,8 +27,8 @@ float PID_Compute(PID_Controller_t* pid, float setpoint, float measure, float dt
 	// Proportional term
 	float p_output = pid->kp * error;
 	// Integrative term
-	pid->accumulative_error += error * dt;
-	float i_output = pid->ki * pid->accumulative_error;
+	pid->accumulated_error += error * dt;
+	float i_output = pid->ki * pid->accumulated_error;
 	// Derivative term
 	float derivative = (error - pid->previous_error) / dt;
 	float d_output = pid->kd * derivative;
