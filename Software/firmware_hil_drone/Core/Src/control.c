@@ -10,7 +10,7 @@
 #include "mixer.h"
 #include "hardware.h"
 #include "config.h"
-//#include "physics.h"
+#include "physics.h"
 
 // PIDs instances
 PID_Controller_t pid_z;
@@ -52,7 +52,7 @@ void TIM6_DAC_IRQHandler(void)
 		tick ++;
 
 		// Update state (SIMULATED)
-		// Physics_Update(TIM6_DT);
+		Physics_Update(TIM6_DT, U1, U2, U3, U4);
 
 		// External loop; Navigation (100Hz -> each 10 ms)
 		if(tick % 10 == 0) U1 = PID_Compute(&pid_z, desired_z, actual_z, 0.01f);
