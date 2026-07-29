@@ -52,7 +52,7 @@ void TIM6_DAC_IRQHandler(void)
 		Physics_Update(TIM6_DT, U1, U2, U3, U4, &actual_state);
 
 		// External loop; Navigation (100Hz -> each 10 ms)
-		if(tick % 10 == 0) U1 = PID_Compute(&pid_z, desire_state.z, actual_state.z, 0.01f);
+		if(tick % NAV_DIVIDER == 0) U1 = PID_Compute(&pid_z, desire_state.z, actual_state.z, NAV_DT);
 
 		// Internal loop; Actitude (1000Hz -> each 1 ms)
 		U2 = PID_Compute(&pid_roll,  desire_state.roll,  actual_state.roll,  TIM6_DT);

@@ -13,6 +13,10 @@
 #define TIM6_LOOP_HZ 1000.0f
 #define TIM6_DT      (1.0f / TIM6_LOOP_HZ)
 
+#define NAV_DIVIDER 10
+#define NAV_LOOP_HZ (TIM6_LOOP_HZ / NAV_DIVIDER)
+#define NAV_DT		(1.0f / NAV_LOOP_HZ)
+
 // Flight params (Adjustables in real time)
 typedef struct {
 	float weight_kg;	 // Total Drone weight in kilograms
