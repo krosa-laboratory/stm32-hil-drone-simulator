@@ -28,7 +28,8 @@ Core/Src/control.o: ../Core/Src/control.c ../Core/Inc/control.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pcd_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h \
- ../Core/Inc/config.h ../Core/Inc/physics.h
+ ../Core/Inc/config.h ../Core/Inc/state.h ../Core/Inc/physics.h \
+ ../Core/Inc/state.h
 ../Core/Inc/control.h:
 ../Core/Inc/pid.h:
 ../Core/Inc/mixer.h:
@@ -62,4 +63,6 @@ Core/Src/control.o: ../Core/Src/control.c ../Core/Inc/control.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h:
 ../Core/Inc/config.h:
+../Core/Inc/state.h:
 ../Core/Inc/physics.h:
+../Core/Inc/state.h:

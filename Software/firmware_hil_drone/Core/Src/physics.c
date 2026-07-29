@@ -8,16 +8,15 @@
 #include "config.h"
 #include "physics.h"
 
-extern float actual_roll, actual_pitch, actual_yaw, actual_z;
 static float velocity_z, velocity_roll, velocity_pitch, velocity_yaw;
 
-void Physics_Update(float dt, float u1, float u2, float u3, float u4)
+void Physics_Update(float dt, float u1, float u2, float u3, float u4, FlightState_t* state)
 {
 
 	// --- Altitude dynamics
 	float acceleration_z = (u1 / config.weight_kg) - 9.81;
 	velocity_z = velocity_z + (acceleration_z * dt);
-	actual_z = actual_z + (velocity_z * dt);
+	state->z += velocity_z * dt;
 
 	// --- Rotational dynamics
 	// Angular accelerations
@@ -33,8 +32,8 @@ void Physics_Update(float dt, float u1, float u2, float u3, float u4)
 	velocity_pitch *= 0.99f;
 	velocity_yaw   *= 0.99f;
 	// Actual angles
-	actual_roll  = actual_roll + (velocity_roll * dt);
-	actual_pitch = actual_pitch + (velocity_pitch * dt);
-	actual_yaw   = actual_yaw + (velocity_yaw * dt);
+	state->roll  += velocity_roll  * dt;
+	state->pitch += velocity_pitch * dt;
+	state->yaw   += velocity_yaw   * dt;
 
 }

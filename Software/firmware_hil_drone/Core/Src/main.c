@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "state.h"
 #include "config.h"
 #include "control.h"
 #include "hardware.h"
@@ -48,17 +49,8 @@
 
 /* USER CODE BEGIN PV */
 
-// Real state variables
-float actual_z 	   = 0.0f;
-float actual_roll  = 0.0f;
-float actual_pitch = 0.0f;
-float actual_yaw   = 0.0f;
-
-// Reference variables
-float desired_z     = 5.0f;
-float desired_roll  = 0.0f;
-float desired_pitch = 0.0f;
-float desired_yaw   = 0.0f;
+FlightState_t actual_state  = { 0.0f, 0.0f, 0.0f, 0.0f };
+FlightState_t desire_state  = { 0.0f, 0.0f, 0.0f, 5.0f };
 
 /* USER CODE END PV */
 
