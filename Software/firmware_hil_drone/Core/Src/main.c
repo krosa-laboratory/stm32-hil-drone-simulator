@@ -98,6 +98,7 @@ int main(void)
   MX_USB_Device_Init();
   /* USER CODE BEGIN 2 */
 
+  Config_LoadStatus();
   Control_Init(); // Prepare memory and maths before hardware IMPORTANT!
   Hardware_Init(); // Turn on motors and system heartbeat
 

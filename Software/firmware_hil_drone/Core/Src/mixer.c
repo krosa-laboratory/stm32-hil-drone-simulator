@@ -17,10 +17,10 @@ void Mixer_Compute(float U1, float U2, float U3, float U4)
 	// Convert U1 to PWM base, we assume U1 = 0 is the iddle motor rotation defined in configuration
 	float base_throttle = PWM_MIN_US + (U1 * k);
 	// Apply Quad-X geometrics expressions
-	float m1 = base_throttle + (U2 * k) - (U3 * k) - (U4 + k);
-	float m2 = base_throttle - (U2 * k) - (U3 * k) + (U4 + k);
-	float m3 = base_throttle - (U2 * k) + (U3 * k) - (U4 + k);
-	float m4 = base_throttle + (U2 * k) + (U3 * k) + (U4 + k);
+	float m1 = base_throttle + (U2 * k) - (U3 * k) - (U4 * k);
+	float m2 = base_throttle - (U2 * k) - (U3 * k) + (U4 * k);
+	float m3 = base_throttle - (U2 * k) + (U3 * k) - (U4 * k);
+	float m4 = base_throttle + (U2 * k) + (U3 * k) + (U4 * k);
 	// Strict security saturations using config macros
 	if(m1 < PWM_MIN_US) m1 = PWM_MIN_US; else if(m1 > PWM_MAX_US) m1 = PWM_MAX_US;
 	if(m2 < PWM_MIN_US) m2 = PWM_MIN_US; else if(m2 > PWM_MAX_US) m2 = PWM_MAX_US;

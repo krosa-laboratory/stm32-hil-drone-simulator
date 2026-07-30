@@ -31,4 +31,6 @@ typedef struct {
 // Global variable with the active configuration
 extern DroneConfig_t config;
 
+void Config_LoadStatus(void);
+
 #endif /* INC_CONFIG_H_ */

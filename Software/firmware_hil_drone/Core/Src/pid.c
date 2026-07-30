@@ -27,11 +27,15 @@ float PID_Compute(PID_Controller_t* pid, float setpoint, float measure, float dt
 	// Proportional term
 	float p_output = pid->kp * error;
 	// Integrative term
-	pid->accumulated_error += error * dt;
-	// Limit the integration to avoid it reachs INF
-	float max_i = pid->output_limit / pid->ki;
-	if(pid->accumulated_error > max_i)  pid->accumulated_error =  max_i;
-	if(pid->accumulated_error < -max_i) pid->accumulated_error = -max_i;
+	if(pid->ki > 0.0001f)
+	{
+		pid->accumulated_error += error * dt;
+		float max_i = pid->output_limit / pid->ki;
+		if(pid->accumulated_error > max_i)  pid->accumulated_error =  max_i;
+		if(pid->accumulated_error < -max_i) pid->accumulated_error = -max_i;
+	} else {
+		pid->accumulated_error = 0.0f;
+	}
 	// Now we calculate the integrative term
 	float i_output = pid->ki * pid->accumulated_error;
 	// Derivative term

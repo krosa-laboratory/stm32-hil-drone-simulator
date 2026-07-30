@@ -62,7 +62,6 @@ void TIM6_DAC_IRQHandler(void)
 		if(tick % NAV_DIVIDER == 0)
 		{
 			// Z Navigation === Altitude
-			float dt_nav = NAV_DT;
 			// Calculate desire pushing force
 			float force_pid_z = PID_Compute(&pid_z, desire_state.z, actual_state.z, NAV_DT);
 			desire_U1 = (config.weight_kg * 9.81f) + force_pid_z;
@@ -70,10 +69,9 @@ void TIM6_DAC_IRQHandler(void)
 			float max_U1 = 3.0f * config.weight_kg * 9.81f;
 			if(desire_U1 < 0.0f) desire_U1 = 0.0f;
 			else if(desire_U1 > max_U1) desire_U1 = max_U1;
-			// X Navigation
-			desire_state.pitch = PID_Compute(&pid_x, desire_state.x, actual_state.x, NAV_DT);
-			// Y Navigation
-			desire_state.pitch = PID_Compute(&pid_y, desire_state.y, actual_state.y, NAV_DT);
+			// X & Y Navigation
+			desire_state.pitch =  PID_Compute(&pid_x, desire_state.x, actual_state.x, NAV_DT);
+			desire_state.roll  = -PID_Compute(&pid_y, desire_state.y, actual_state.y, NAV_DT);
 		}
 
 		// Motors delay
