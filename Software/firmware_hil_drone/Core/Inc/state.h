@@ -9,10 +9,12 @@
 #define INC_STATE_H_
 
 typedef struct {
+	float x;	 // Meters
+	float y;	 // Meters
+	float z;	 // Meters
 	float roll;  // Degrees
 	float pitch; // Degrees
 	float yaw;   // Degrees
-	float z;     // Meters (Altitude)
 } FlightState_t;
 
 // Public exposition of the system state variables

@@ -25,6 +25,7 @@ typedef struct {
 	float zz_inertia;	 // Yaw moment of inertia
 	float k_pwm;		 // Conversion factor Newtons -> Ticks PWM
 	float max_angle_rad; // Maximum tilt angle permitted for safety reasons
+	float f_aero;        // Linear aerodynamic drag coefficient (N/(m/s))
 } DroneConfig_t;
 
 // Global variable with the active configuration

@@ -17,4 +17,5 @@ void Config_LoadStatus(void)
 	config.zz_inertia    = 0.025f;
 	config.k_pwm	     = 28.5f;
 	config.max_angle_rad = 0.5f;
+	config.f_aero        = 0.1f;
 }
