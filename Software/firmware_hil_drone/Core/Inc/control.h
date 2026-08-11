@@ -10,4 +10,6 @@
 
 void Control_Init(void);
 
+float Control_GetRealU1(void);
+
 #endif /* INC_CONTROL_H_ */

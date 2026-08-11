@@ -65,7 +65,7 @@ main-build: firmware_hil_drone.elf secondary-outputs
 
 # Tool invocations
 firmware_hil_drone.elf firmware_hil_drone.map: $(OBJS) $(USER_OBJS) C:\Users\kevin\Documents\Projects\stm32-hil-drone-simulator\Software\firmware_hil_drone\STM32G474CEUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "firmware_hil_drone.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\kevin\Documents\Projects\stm32-hil-drone-simulator\Software\firmware_hil_drone\STM32G474CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="firmware_hil_drone.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "firmware_hil_drone.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\kevin\Documents\Projects\stm32-hil-drone-simulator\Software\firmware_hil_drone\STM32G474CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="firmware_hil_drone.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

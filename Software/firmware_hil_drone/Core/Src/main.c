@@ -26,6 +26,7 @@
 #include "state.h"
 #include "config.h"
 #include "control.h"
+#include "telemetry.h"
 #include "hardware.h"
 
 /* USER CODE END Includes */
@@ -99,8 +100,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   Config_LoadStatus();
-  Control_Init(); // Prepare memory and maths before hardware IMPORTANT!
-  Hardware_Init(); // Turn on motors and system heartbeat
+  Control_Init();   // Prepare memory and math before hardware IMPORTANT!
+  Telemetry_Init(); // Start the telemetry module buffer
+  Hardware_Init();  // Turn on motors and system heartbeat
 
   /* USER CODE END 2 */
 
@@ -110,11 +112,16 @@ int main(void)
   {
       /* USER CODE END WHILE */
 
-	  // Read USB received commands
-	  // USB_Process_Data();
+	  // Process the incoming commands
+	  Telemetry_ProcessCommands(&desire_state);
 
 	  // Send telemetry to USB
-	  // printf("Z: %.2f | R: %.2f | P: %.2f\n", actual_z, actual_roll, actual_pitch);
+	  static uint32_t last_telemetry_time = 0;
+	  if ((HAL_GetTick() - last_telemetry_time) >= 50)
+	  {
+		  last_telemetry_time = HAL_GetTick();
+		  Telemetry_SendState(&actual_state, &desire_state, Control_GetRealU1());
+	  }
 
 	  /* USER CODE BEGIN 3 */
   }

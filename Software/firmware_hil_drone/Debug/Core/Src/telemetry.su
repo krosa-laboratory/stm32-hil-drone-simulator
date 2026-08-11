@@ -1,0 +1,4 @@
+../Core/Src/telemetry.c:16:6:Telemetry_Init	8	static
+../Core/Src/telemetry.c:22:6:Telemetry_SendState	120	static
+../Core/Src/telemetry.c:41:6:Telemetry_StoreCommand	16	static
+../Core/Src/telemetry.c:46:6:Telemetry_ProcessCommands	16	static

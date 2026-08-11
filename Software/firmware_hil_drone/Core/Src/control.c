@@ -42,6 +42,11 @@ void Control_Init(void)
 
 }
 
+float Control_GetRealU1(void)
+{
+    return real_U1;
+}
+
 void TIM6_DAC_IRQHandler(void)
 {
 
