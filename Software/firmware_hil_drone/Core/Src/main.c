@@ -50,8 +50,8 @@
 
 /* USER CODE BEGIN PV */
 
-FlightState_t actual_state  = { 0.0f, 0.0f, 0.0f, 0.0f };
-FlightState_t desire_state  = { 0.0f, 0.0f, 0.0f, 5.0f };
+FlightState_t actual_state  = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+FlightState_t desire_state  = { 0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f };
 
 /* USER CODE END PV */
 
