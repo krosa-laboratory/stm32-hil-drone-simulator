@@ -18,14 +18,14 @@ void Hardware_Init(void)
 void TIM2_Init(void)
 {
 
-	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN; // Enable the clock for the Timer
-	RCC->AHB2ENR  |= RCC_AHB2ENR_GPIOAEN; // Enable the clock for GPIO Port A, where PWM Outputs are (PA0 - PA3)
+	RCC->APB1ENR1  |= RCC_APB1ENR1_TIM2EN; // Enable the clock for the Timer
+	RCC->AHB2ENR   |= RCC_AHB2ENR_GPIOAEN; // Enable the clock for GPIO Port A, where PWM Outputs are (PA0 - PA3)
 
-	GPIOA->MODER   &= ~(GPIO_MODER_MODE0_1     | GPIO_MODER_MODE1_1     | GPIO_MODER_MODE2_1     | GPIO_MODER_MODE3_1); // Clear MODER register
-	GPIOA->MODER   |=   GPIO_MODER_MODE0_1     | GPIO_MODER_MODE1_1     | GPIO_MODER_MODE2_1     | GPIO_MODER_MODE3_1;  // Configure GPIOs in Alternate Function mode
+	GPIOA->MODER   &= ~(GPIO_MODER_MODE0   | GPIO_MODER_MODE1   | GPIO_MODER_MODE2   | GPIO_MODER_MODE3); 	// Clear MODER register
+	GPIOA->MODER   |=  (GPIO_MODER_MODE0_1 | GPIO_MODER_MODE1_1 | GPIO_MODER_MODE2_1 | GPIO_MODER_MODE3_1); // Configure GPIOs in Alternate Function mode
 
-	GPIOA->AFR[0]  &= ~(GPIO_AFRL_AFSEL0_0     | GPIO_AFRL_AFSEL1_0     | GPIO_AFRL_AFSEL2_0     | GPIO_AFRL_AFSEL3_0); // Clear AFSEL register
-	GPIOA->AFR[0]  |=   GPIO_AFRL_AFSEL0_0     | GPIO_AFRL_AFSEL1_0     | GPIO_AFRL_AFSEL2_0     | GPIO_AFRL_AFSEL3_0;  // Configure the Alternate Function to match Timer Channels (AF1)
+	GPIOA->AFR[0]  &= ~(GPIO_AFRL_AFSEL0   | GPIO_AFRL_AFSEL1   | GPIO_AFRL_AFSEL2   | GPIO_AFRL_AFSEL3);   // Clear AFSEL register
+	GPIOA->AFR[0]  |=  (GPIO_AFRL_AFSEL0_0 | GPIO_AFRL_AFSEL1_0 | GPIO_AFRL_AFSEL2_0 | GPIO_AFRL_AFSEL3_0); // Configure the Alternate Function to match Timer Channels (AF1)
 
 	GPIOA->OSPEEDR &= ~(GPIO_OSPEEDR_OSPEED0_1 | GPIO_OSPEEDR_OSPEED1_1 | GPIO_OSPEEDR_OSPEED2_1 | GPIO_OSPEEDR_OSPEED3_1); // Clear OSPEEDR register
 	GPIOA->OSPEEDR |=   GPIO_OSPEEDR_OSPEED0_1 | GPIO_OSPEEDR_OSPEED1_1 | GPIO_OSPEEDR_OSPEED2_1 | GPIO_OSPEEDR_OSPEED3_1;  // Configure the GPIOs speed in HIGH for a quick response in PWM

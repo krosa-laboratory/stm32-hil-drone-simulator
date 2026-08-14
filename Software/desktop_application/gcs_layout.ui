@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1720</width>
+    <height>1218</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="container_3d" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>650</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: black</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="container_plots" native="true">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>10</y>
+      <width>1050</width>
+      <height>450</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_telemetry">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>470</y>
+      <width>140</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
