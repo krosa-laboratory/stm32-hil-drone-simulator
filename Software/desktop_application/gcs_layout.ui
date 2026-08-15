@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>650</width>
-      <height>450</height>
+      <width>850</width>
+      <height>600</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -30,20 +30,20 @@
    <widget class="QWidget" name="container_plots" native="true">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>910</x>
       <y>10</y>
-      <width>1050</width>
-      <height>450</height>
+      <width>800</width>
+      <height>1050</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_telemetry">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>470</y>
-      <width>140</width>
-      <height>20</height>
+      <x>10</x>
+      <y>620</y>
+      <width>851</width>
+      <height>500</height>
      </rect>
     </property>
     <property name="font">
