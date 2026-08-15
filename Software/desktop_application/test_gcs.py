@@ -1,9 +1,12 @@
 import sys
 import os
+import math
 import collections
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout
 from PyQt6 import uic
+from PyQt6.QtGui import QVector3D
 import pyqtgraph as pg
+import pyqtgraph.opengl as gl
 from telemetry_core import TelemetryEngine
 
 class AdvancedGCS(QMainWindow):
@@ -16,8 +19,9 @@ class AdvancedGCS(QMainWindow):
 
         self.setWindowTitle("STM32 HIL Drone Control Station")
 
-        # INITIALIZE PLOTS
+        # INITIALIZE PLOTS & 3D
         self.init_plots()
+        self.init_3d()
 
         # INITIALIZE TELEMETRY ENGINE
         self.telemetry = TelemetryEngine(port_name='COM3') 
@@ -75,6 +79,38 @@ class AdvancedGCS(QMainWindow):
         # self.curve_z_ref = self.plot_z.plot(pen=pg.mkPen('y', width=2, style=pg.QtCore.Qt.PenStyle.DashLine)) # Optional
         self.container_plots.layout().addWidget(self.plot_z)
 
+    def init_3d(self):
+        """Configures the PyOpenGL widget inside the Designer container."""
+        # Ensure the designer container has a layout
+        if self.container_3d.layout() is None:
+            self.container_3d.setLayout(QVBoxLayout())
+
+        # Create the 3D Viewer
+        self.view_3d = gl.GLViewWidget()
+        self.view_3d.setCameraPosition(distance=10, elevation=30, azimuth=45) # Perspectiva isométrica
+
+        # Add it to the container of the Qt Designer
+        self.container_3d.layout().addWidget(self.view_3d)
+
+        # Create the floor grid and add it to the 3D world
+        grid = gl.GLGridItem()
+        grid.scale(2, 2, 2)
+        self.view_3d.addItem(grid)
+
+        # Create drone and axis
+        self.drone_model = gl.GLAxisItem(size=QVector3D(2, 2, 2))
+        self.view_3d.addItem(self.drone_model)
+
+    def update_3d_model(self, roll_deg, pitch_deg, alt_z):
+        """Adds new data to the model and redraws the 3D model."""
+        # Reset the lasts transformations
+        self.drone_model.resetTransform()
+        # First, translate
+        self.drone_model.translate(0, 0, alt_z)
+        # Second, rotations
+        self.drone_model.rotate(roll_deg, 1, 0, 0);  # Roll rotates in X axis
+        self.drone_model.rotate(pitch_deg, 0, 1, 0); # Pitch rotates in Y axis
+
     def update_plots(self, data):
         """Adds new data to the history and redraws the curves."""
         # Fill with zeros if any data is missing initially to avoid errors
@@ -99,6 +135,11 @@ class AdvancedGCS(QMainWindow):
         self.curve_pitch_ref.setData(list(self.data_history['P_ref']))
 
         self.curve_z.setData(list(self.data_history['Z']))
+
+        # Update the 3D model with this same data
+        roll_degress = roll * (180 / math.pi)
+        pitch_degress = pitch * (180 / math.pi)
+        self.update_3d_model(roll_deg=roll_degress, pitch_deg=pitch_degress, alt_z=z)
 
     def update_status(self, is_connected, msg):
         self.statusBar().showMessage(f"Data Link: {msg}")
