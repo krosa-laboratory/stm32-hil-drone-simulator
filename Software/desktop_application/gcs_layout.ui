@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow, QWidget {
+    background-color: #121214;
+    color: #e1e1e6;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="container_3d" native="true">
     <property name="geometry">
@@ -36,6 +43,23 @@
       <height>1201</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+    color: #00ffcc;
+    border: 1px solid #33333d;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    background-color: #121214;
+}</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_telemetry">
     <property name="geometry">
@@ -48,8 +72,26 @@
     </property>
     <property name="font">
      <font>
+      <family>Segoe UI</family>
       <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox {
+    color: #00ffcc;
+    border: 1px solid #33333d;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 6px;
+    background-color: #121214;
+}</string>
     </property>
     <property name="text">
      <string>TextLabel</string>
@@ -59,19 +101,31 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>945</y>
-      <width>50</width>
+      <y>950</y>
+      <width>45</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Consolas</family>
+      <pointsize>10</pointsize>
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #00ffcc;
+    background-color: #16161a;
+    border: 1px solid #2a2a33;
+    border-radius: 4px;
+    padding: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10pt;
+}</string>
+    </property>
     <property name="text">
-     <string>Kd:</string>
+     <string>Kp:</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="spin_kp">
@@ -80,11 +134,29 @@
       <x>110</x>
       <y>950</y>
       <width>121</width>
-      <height>21</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+     <string notr="true">QDoubleSpinBox {
+    background-color: #1a1a1e;
+    color: #00ff66;
+    border: 1px solid #33333d;
+    border-radius: 4px;
+    padding: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: bold;
+}
+
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
+    background-color: #25252d;
+    border: none;
+    width: 14px;
+}
+
+QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
+    background-color: #00ffcc;
+}</string>
     </property>
     <property name="decimals">
      <number>3</number>
@@ -102,11 +174,29 @@
       <x>360</x>
       <y>950</y>
       <width>121</width>
-      <height>21</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+     <string notr="true">QDoubleSpinBox {
+    background-color: #1a1a1e;
+    color: #00ff66;
+    border: 1px solid #33333d;
+    border-radius: 4px;
+    padding: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: bold;
+}
+
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
+    background-color: #25252d;
+    border: none;
+    width: 14px;
+}
+
+QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
+    background-color: #00ffcc;
+}</string>
     </property>
     <property name="decimals">
      <number>3</number>
@@ -124,11 +214,29 @@
       <x>610</x>
       <y>950</y>
       <width>121</width>
-      <height>21</height>
+      <height>30</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+     <string notr="true">QDoubleSpinBox {
+    background-color: #1a1a1e;
+    color: #00ff66;
+    border: 1px solid #33333d;
+    border-radius: 4px;
+    padding: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: bold;
+}
+
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
+    background-color: #25252d;
+    border: none;
+    width: 14px;
+}
+
+QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
+    background-color: #00ffcc;
+}</string>
     </property>
     <property name="decimals">
      <number>3</number>
@@ -144,16 +252,28 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>945</y>
-      <width>50</width>
+      <y>950</y>
+      <width>45</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Consolas</family>
+      <pointsize>10</pointsize>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #00ffcc;
+    background-color: #16161a;
+    border: 1px solid #2a2a33;
+    border-radius: 4px;
+    padding: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10pt;
+}</string>
     </property>
     <property name="text">
      <string>Ki:</string>
@@ -163,19 +283,31 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>945</y>
-      <width>50</width>
+      <y>950</y>
+      <width>45</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <family>Consolas</family>
+      <pointsize>10</pointsize>
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #00ffcc;
+    background-color: #16161a;
+    border: 1px solid #2a2a33;
+    border-radius: 4px;
+    padding: 6px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10pt;
+}</string>
+    </property>
     <property name="text">
-     <string>Ki:</string>
+     <string>Kd:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_send_pid">
@@ -189,9 +321,31 @@
     </property>
     <property name="font">
      <font>
+      <family>Segoe UI</family>
       <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #1f1f23;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QPushButton:hover {
+    background-color: #00ffcc;
+    color: #121214;
+}
+
+QPushButton:pressed {
+    background-color: #008f6b;
+    color: #ffffff;
+}</string>
     </property>
     <property name="text">
      <string>UPDATE PIDs</string>

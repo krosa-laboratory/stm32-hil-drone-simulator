@@ -33,6 +33,7 @@ class AdvancedGCS(QMainWindow):
 
         self.keyPressEvent = self.handleKeypress
         self.telemetry.start()
+        self.setFocus()
 
     def updateStatus(self, is_connected, msg):
         self.statusBar().showMessage(f"Data Link: {msg}")
