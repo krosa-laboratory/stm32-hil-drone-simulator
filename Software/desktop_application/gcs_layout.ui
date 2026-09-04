@@ -33,7 +33,7 @@
       <x>910</x>
       <y>10</y>
       <width>800</width>
-      <height>1050</height>
+      <height>1201</height>
      </rect>
     </property>
    </widget>
@@ -42,8 +42,8 @@
      <rect>
       <x>10</x>
       <y>620</y>
-      <width>851</width>
-      <height>500</height>
+      <width>850</width>
+      <height>300</height>
      </rect>
     </property>
     <property name="font">
@@ -53,6 +53,148 @@
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_telemetry_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>945</y>
+      <width>50</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Kd:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spin_kp">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>950</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="maximum">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.050000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spin_ki">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>950</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="maximum">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.050000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="spin_kd">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>950</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #1e1e1e; color: #00ff00; border: 1px solid #444; padding: 4px; font-family: monospace;</string>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+    <property name="maximum">
+     <double>50.000000000000000</double>
+    </property>
+    <property name="singleStep">
+     <double>0.050000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_telemetry_3">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>945</y>
+      <width>50</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ki:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_telemetry_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>945</y>
+      <width>50</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ki:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_send_pid">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>1000</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>UPDATE PIDs</string>
     </property>
    </widget>
   </widget>

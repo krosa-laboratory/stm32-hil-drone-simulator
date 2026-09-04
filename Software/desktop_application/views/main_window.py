@@ -29,6 +29,7 @@ class AdvancedGCS(QMainWindow):
         self.telemetry.data_updated.connect(self.updateDisplay)
         self.telemetry.data_updated.connect(self.plot_manager.updateData)
         self.telemetry.data_updated.connect(self.viewer_3d.updateModel)
+        self.btn_send_pid.clicked.connect(self.send_pid_gains)
 
         self.keyPressEvent = self.handleKeypress
         self.telemetry.start()
@@ -47,6 +48,23 @@ class AdvancedGCS(QMainWindow):
             f"Throttle: {data.get('U1', 0.0):.2f} N"
         )
         self.label_telemetry.setText(display_str)
+
+    def send_pid_gains(self):
+        """Serialize PID inputs and routes them to the STM32 via USB."""
+        kp = self.spin_kp.value()
+        ki = self.spin_ki.value()
+        kd = self.spin_kd.value()
+
+        # Payload format required by the firmware
+        command_frame = f"P:{kp:.3f},I:{ki:.3f},D:{kd:.3f}\n"
+
+        # Inject directly through the hardware serial port
+        if self.telemetry and self.telemetry.is_running:
+            try:
+                self.telemetry.serial_port.write(command_frame.encode('utf-8'))
+                self.statusBar().showMessage(f"PIDs Sent: {command_frame.strip()}")
+            except Exception as e:
+                self.statusBar().showMessage(f"TX Error: {str(e)}")
 
     def handleKeypress(self, event):
         key = event.text().upper()
