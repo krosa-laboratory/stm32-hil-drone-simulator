@@ -270,6 +270,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 
 	if(status == 1) Control_UpdatePID(in_kp, in_ki, in_kd);
 	else if(status == 2) Telemetry_StoreCommand(in_key);
+	else if(status == 3) Telemetry_Sync(Control_GetPIDkp(), Control_GetPIDki(), Control_GetPIDkd());
 
 	USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
 	USBD_CDC_ReceivePacket(&hUsbDeviceFS);

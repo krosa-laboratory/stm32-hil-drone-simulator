@@ -29,6 +29,7 @@ class AdvancedGCS(QMainWindow):
         self.telemetry.data_updated.connect(self.updateDisplay)
         self.telemetry.data_updated.connect(self.plot_manager.updateData)
         self.telemetry.data_updated.connect(self.viewer_3d.updateModel)
+        self.telemetry.pid_sync_received.connect(self.sync_gui_pids)
         self.btn_send_pid.clicked.connect(self.send_pid_gains)
 
         self.keyPressEvent = self.handleKeypress
@@ -49,6 +50,14 @@ class AdvancedGCS(QMainWindow):
             f"Throttle: {data.get('U1', 0.0):.2f} N"
         )
         self.label_telemetry.setText(display_str)
+
+    def sync_gui_pids(self, kp, ki, kd):
+        """Updates the UI spinboxes with the actual values retrieved from the STM32."""
+        self.spin_kp.setValue(kp)
+        self.spin_ki.setValue(ki)
+        self.spin_kd.setValue(kd)
+
+        self.statusBar().showMessage(f"PID State Synced from MCU -> Kp: {kp}, Ki: {ki}, Kd: {kd}", 5000)
 
     def send_pid_gains(self):
         """Serialize PID inputs and routes them to the STM32 via USB."""

@@ -47,6 +47,21 @@ float Control_GetRealU1(void)
     return real_U1;
 }
 
+float Control_GetPIDkp(void)
+{
+	return pid_roll.kp;
+}
+
+float Control_GetPIDki(void)
+{
+	return pid_roll.ki;
+}
+
+float Control_GetPIDkd(void)
+{
+	return pid_roll.kd;
+}
+
 void Control_UpdatePID(float new_kp, float new_ki, float new_kd)
 {
 	pid_roll.kp = new_kp;

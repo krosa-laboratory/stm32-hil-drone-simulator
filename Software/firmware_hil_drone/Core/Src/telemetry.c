@@ -69,6 +69,7 @@ void Telemetry_ProcessCommands(FlightState_t* desire)
 
 int Telemetry_ParseCommand(const char* rx_buffer, float* new_kp, float* new_ki, float* new_kd, char* key_cmd)
 {
+	if (strncmp(rx_buffer, "GET_PID", 7) == 0) return 3;
     if (sscanf(rx_buffer, "P:%f,I:%f,D:%f", new_kp, new_ki, new_kd) == 3) return 1;
     else if (rx_buffer[0] != '\0')
     {

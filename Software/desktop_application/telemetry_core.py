@@ -7,6 +7,7 @@ class TelemetryEngine(QThread):
     # data_updated will send a dictionary like { 'R': 0.0, 'Z': 5.0, ... }
     data_updated = pyqtSignal(dict)
     connection_status = pyqtSignal(bool, str)
+    pid_sync_received = pyqtSignal(float, float, float)
 
     def __init__(self, port_name, baudrate=115200):
         super().__init__()
@@ -27,6 +28,10 @@ class TelemetryEngine(QThread):
             # Clear the input buffer in case of accumulated junk data
             self.serial_port.reset_input_buffer()
 
+            # Before start, get the PID params
+            time.sleep(0.1)
+            self.serial_port.write(b"GET_PID\n")
+
             while self.is_running:
                 if self.serial_port.in_waiting > 0:
                     # Read the line until \r\n
@@ -35,7 +40,14 @@ class TelemetryEngine(QThread):
                     try:
                         # Decode bytes to UTF-8 string
                         text_data = raw_data.decode('utf-8').strip()
-                        
+
+                        # Detect sync payload
+                        if text_data.startswith("INIT_PID:"):
+                            payload = text_data.split(":")[1]
+                            kp, ki, kd = map(float, payload.split(","))
+                            self.pid_sync_received.emit(kp, ki, kd)
+                            continue
+
                         # Parse the CSV string: "R:0.00,R_ref:0.00,Z:5.00,U1:12.3"
                         # Elegantly convert it into a Python dictionary
                         parsed_dict = {}

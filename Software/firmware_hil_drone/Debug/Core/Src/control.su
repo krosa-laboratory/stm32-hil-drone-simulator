@@ -1,4 +1,7 @@
 ../Core/Src/control.c:31:6:Control_Init	8	static
 ../Core/Src/control.c:45:7:Control_GetRealU1	4	static
-../Core/Src/control.c:50:6:Control_UpdatePID	24	static
-../Core/Src/control.c:64:6:TIM6_DAC_IRQHandler	24	static
+../Core/Src/control.c:50:7:Control_GetPIDkp	4	static
+../Core/Src/control.c:55:7:Control_GetPIDki	4	static
+../Core/Src/control.c:60:7:Control_GetPIDkd	4	static
+../Core/Src/control.c:65:6:Control_UpdatePID	24	static
+../Core/Src/control.c:79:6:TIM6_DAC_IRQHandler	24	static
