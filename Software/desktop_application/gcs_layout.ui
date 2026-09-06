@@ -24,8 +24,8 @@
    <widget class="QWidget" name="container_3d" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>20</x>
+      <y>50</y>
       <width>850</width>
       <height>600</height>
      </rect>
@@ -64,8 +64,8 @@ QGroupBox::title {
    <widget class="QLabel" name="label_telemetry">
     <property name="geometry">
      <rect>
-      <x>119</x>
-      <y>620</y>
+      <x>90</x>
+      <y>700</y>
       <width>621</width>
       <height>300</height>
      </rect>
@@ -101,7 +101,7 @@ QGroupBox::title {
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>970</y>
+      <y>1050</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -132,7 +132,7 @@ QGroupBox::title {
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>970</y>
+      <y>1050</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -140,18 +140,24 @@ QGroupBox::title {
     <property name="styleSheet">
      <string notr="true">QDoubleSpinBox {
     background-color: #1a1a1e;
-    color: #00ff66;
+    color: #00ffcc;
     border: 1px solid #33333d;
     border-radius: 4px;
-    padding: 4px;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-weight: bold;
+    padding-right: 15px;
 }
 
 QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
-    background-color: #25252d;
-    border: none;
-    width: 14px;
+    background-color: #2a2a30;
+    border: 1px solid #33333d;
+    width: 16px;
+}
+
+QDoubleSpinBox::up-button {
+    border-top-right-radius: 3px;
+}
+
+QDoubleSpinBox::down-button {
+    border-bottom-right-radius: 3px;
 }
 
 QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
@@ -172,7 +178,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>970</y>
+      <y>1050</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -180,18 +186,24 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="styleSheet">
      <string notr="true">QDoubleSpinBox {
     background-color: #1a1a1e;
-    color: #00ff66;
+    color: #00ffcc;
     border: 1px solid #33333d;
     border-radius: 4px;
-    padding: 4px;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-weight: bold;
+    padding-right: 15px;
 }
 
 QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
-    background-color: #25252d;
-    border: none;
-    width: 14px;
+    background-color: #2a2a30;
+    border: 1px solid #33333d;
+    width: 16px;
+}
+
+QDoubleSpinBox::up-button {
+    border-top-right-radius: 3px;
+}
+
+QDoubleSpinBox::down-button {
+    border-bottom-right-radius: 3px;
 }
 
 QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
@@ -212,7 +224,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>970</y>
+      <y>1050</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -220,18 +232,24 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="styleSheet">
      <string notr="true">QDoubleSpinBox {
     background-color: #1a1a1e;
-    color: #00ff66;
+    color: #00ffcc;
     border: 1px solid #33333d;
     border-radius: 4px;
-    padding: 4px;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-weight: bold;
+    padding-right: 15px;
 }
 
 QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
-    background-color: #25252d;
-    border: none;
-    width: 14px;
+    background-color: #2a2a30;
+    border: 1px solid #33333d;
+    width: 16px;
+}
+
+QDoubleSpinBox::up-button {
+    border-top-right-radius: 3px;
+}
+
+QDoubleSpinBox::down-button {
+    border-bottom-right-radius: 3px;
 }
 
 QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
@@ -252,7 +270,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>970</y>
+      <y>1050</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -283,7 +301,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>970</y>
+      <y>1050</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -314,7 +332,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>1040</y>
+      <y>1120</y>
       <width>200</width>
       <height>30</height>
      </rect>
