@@ -19,6 +19,13 @@ void Telemetry_Init(void)
 	memset(tx_buffer, 0, sizeof(tx_buffer));
 }
 
+void Telemetry_Sync(float kp, float ki, float kd)
+{
+	char sync_msg[64];
+	sprintf(sync_msg, "INIT_PID:%.3f,%.3f,%.3f\n", kp, ki, kd);
+	CDC_Transmit_FS((uint8_t*)sync_msg, strlen(sync_msg));
+}
+
 void Telemetry_SendState(const FlightState_t* actual, const FlightState_t* desire, float u1)
 {
 
@@ -58,4 +65,15 @@ void Telemetry_ProcessCommands(FlightState_t* desire)
         }
         rx_command = 0; // Empty the incoming command once processed
     }
+}
+
+int Telemetry_ParseCommand(const char* rx_buffer, float* new_kp, float* new_ki, float* new_kd, char* key_cmd)
+{
+    if (sscanf(rx_buffer, "P:%f,I:%f,D:%f", new_kp, new_ki, new_kd) == 3) return 1;
+    else if (rx_buffer[0] != '\0')
+    {
+        *key_cmd = rx_buffer[0];
+        return 2;
+    }
+    return 0;
 }

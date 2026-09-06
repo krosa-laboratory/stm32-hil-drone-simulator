@@ -11,5 +11,6 @@
 void Control_Init(void);
 
 float Control_GetRealU1(void);
+void Control_UpdatePID(float new_kp, float new_ki, float new_kd);
 
 #endif /* INC_CONTROL_H_ */

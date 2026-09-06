@@ -47,6 +47,20 @@ float Control_GetRealU1(void)
     return real_U1;
 }
 
+void Control_UpdatePID(float new_kp, float new_ki, float new_kd)
+{
+	pid_roll.kp = new_kp;
+	pid_roll.ki = new_ki;
+	pid_roll.kd = new_kd;
+
+	pid_pitch.kp = new_kp;
+	pid_pitch.ki = new_ki;
+	pid_pitch.kd = new_kd;
+
+	pid_roll.accumulated_error = 0.0f;
+	pid_pitch.accumulated_error = 0.0f;
+}
+
 void TIM6_DAC_IRQHandler(void)
 {
 

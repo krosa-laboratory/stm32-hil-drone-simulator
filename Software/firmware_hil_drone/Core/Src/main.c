@@ -102,6 +102,7 @@ int main(void)
   Config_LoadStatus();
   Control_Init();   // Prepare memory and math before hardware IMPORTANT!
   Telemetry_Init(); // Start the telemetry module buffer
+  //Telemetry_Sync(); // Send the Syncronization message
   Hardware_Init();  // Turn on motors and system heartbeat
 
   /* USER CODE END 2 */

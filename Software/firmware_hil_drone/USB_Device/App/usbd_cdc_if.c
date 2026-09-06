@@ -23,6 +23,7 @@
 
 /* USER CODE BEGIN INCLUDE */
 #include "telemetry.h"
+#include "control.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -261,12 +262,19 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
-  USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-  USBD_CDC_ReceivePacket(&hUsbDeviceFS);
-  if (*Len > 0) {
-	Telemetry_StoreCommand(Buf[0]);
-  }
-  return (USBD_OK);
+	Buf[*Len] = '\0';
+	float in_kp, in_ki, in_kd;
+	char in_key;
+
+	int status = Telemetry_ParseCommand((const char*)Buf, &in_kp, &in_ki, &in_kd, &in_key);
+
+	if(status == 1) Control_UpdatePID(in_kp, in_ki, in_kd);
+	else if(status == 2) Telemetry_StoreCommand(in_key);
+
+	USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
+	USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+
+	return (USBD_OK);
   /* USER CODE END 6 */
 }
 
