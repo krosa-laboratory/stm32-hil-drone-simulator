@@ -31,10 +31,12 @@ void Telemetry_SendState(const FlightState_t* actual, const FlightState_t* desir
 
 	// Format the message in CSV Serial Plotter compatible
 	int len = snprintf(tx_buffer, sizeof(tx_buffer),
-			"R:%.2f,R_ref:%.2f,P:%.2f,P_ref:%.2f,Z:%.2f,U1:%.2f\r\n",
+			"R:%.2f,R_ref:%.2f,P:%.2f,P_ref:%.2f,Z:%.2f,U1:%.2f,X:%.2f,X_ref:%.2f,Y:%.2f,Y_ref:%.2f\r\n",
 			actual->roll, desire->roll,
 			actual->pitch, desire->pitch,
-			actual->z, u1
+			actual->z, u1,
+			actual->x, desire->x,
+			actual->y, desire->y
 			);
 
 	// Asynchronous transmission if the message is correct

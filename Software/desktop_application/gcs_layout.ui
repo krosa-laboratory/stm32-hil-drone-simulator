@@ -64,9 +64,9 @@ QGroupBox::title {
    <widget class="QLabel" name="label_telemetry">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>119</x>
       <y>620</y>
-      <width>850</width>
+      <width>621</width>
       <height>300</height>
      </rect>
     </property>
@@ -101,7 +101,7 @@ QGroupBox::title {
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>950</y>
+      <y>970</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -132,7 +132,7 @@ QGroupBox::title {
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>950</y>
+      <y>970</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -172,7 +172,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>950</y>
+      <y>970</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -212,7 +212,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>950</y>
+      <y>970</y>
       <width>121</width>
       <height>30</height>
      </rect>
@@ -252,7 +252,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>950</y>
+      <y>970</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -283,7 +283,7 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>950</y>
+      <y>970</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -313,8 +313,8 @@ QDoubleSpinBox::up-button:hover, QDoubleSpinBox::down-button:hover {
    <widget class="QPushButton" name="btn_send_pid">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>1000</y>
+      <x>290</x>
+      <y>1040</y>
       <width>200</width>
       <height>30</height>
      </rect>
