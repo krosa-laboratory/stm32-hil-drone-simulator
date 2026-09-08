@@ -1,6 +1,31 @@
 # STM32 HIL (Hardware-in-the-Loop) Quadcopter Simulator
 
-A professional-grade Hardware-in-the-Loop (HIL) simulation framework designed for a 6-Degrees-of-Freedom (6DoF) quadcopter. This project bridges a real-time embedded flight controller running on an **STM32 microcontroller** with a custom **PyQt6 Ground Control Station (GCS)** over a high-speed USB CDC virtual COM port.
+A Hardware-in-the-Loop (HIL) simulation framework designed for a 6-Degrees-of-Freedom (6DoF) quadcopter. This project bridges a real-time embedded flight controller running on an **STM32 microcontroller** with a custom **PyQt6 Ground Control Station (GCS)** over a high-speed USB CDC virtual COM port.
+
+---
+
+## Graphical User Interface
+
+The custom-built PyQt6 Ground Control Station (GCS) provides a fully integrated industrial dark aerospace environment for real-time telemetry monitoring and flight control:
+
+![GCS Dashboard Overview](Docs/Assets/GCS_GUI.png)
+
+---
+
+### Telemetry & 3D Digital Twin
+
+| 3D OpenGL Digital Twin Viewer | Tactical Top-Down Radar (X-Y Plane) |
+| :---: | :---: |
+| ![3D Viewer](Docs/Assets/3Dmodel_viewer.gif) | ![Tactical Radar](Docs/Assets/XY_viewer.gif) |
+| *Real-time 6DoF wireframe rendering with active 3D trajectory history.* | *Dynamic auto-centering X-Y radar with locked aspect ratio.* |
+
+---
+
+## 🚀 Live Flight Simulation Demo
+
+Here is a demonstration of the manual flight mode in action. Notice the seamless real-time synchronization between keyboard inputs (`W, A, S, D`), the STM32 6DoF physics calculations, the 3D digital twin rotation, and the tactical radar tracking:
+
+![Flight Demo GIF](Docs/Assets/GUI_Example.gif)
 
 ---
 
