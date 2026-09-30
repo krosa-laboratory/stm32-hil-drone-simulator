@@ -1,18 +1,18 @@
-# STM32 HIL (Hardware-in-the-Loop) Quadcopter Simulator
+# STM32 Hardware-In-The-Loop (HIL) 6DoF Flight Simulator
 
-A Hardware-in-the-Loop (HIL) simulation framework designed for a 6-Degrees-of-Freedom (6DoF) quadcopter. This project bridges a real-time embedded flight controller running on an **STM32 microcontroller** with a custom **PyQt6 Ground Control Station (GCS)** over a high-speed USB CDC virtual COM port.
+An advanced Hardware-in-the-Loop (HIL) simulation framework architected for evaluating and tuning quadcopter flight dynamics. This project bridges a real-time deterministic physics engine running *bare-metal* on an **STM32 Microcontroller** with a custom high-performance **PyQt6 Ground Control Station (GCS)** over a high-speed, non-blocking USB CDC virtual COM port.
 
 ---
 
-## Graphical User Interface
+## Graphical User Interface (GCS Overview)
 
-The custom-built PyQt6 Ground Control Station (GCS) provides a fully integrated industrial dark aerospace environment for real-time telemetry monitoring and flight control:
+The custom-built PyQt6 Ground Control Station provides a fully integrated industrial dark aerospace environment for real-time telemetry monitoring, PID tuning, and tactical flight control:
 
 ![GCS Dashboard Overview](Docs/Assets/GCS_GUI.png)
 
 ---
 
-### Telemetry & 3D Digital Twin
+### Real-Time Telemetry & 3D Digital Twin
 
 | 3D OpenGL Digital Twin Viewer | Tactical Top-Down Radar (X-Y Plane) |
 | :---: | :---: |
@@ -23,25 +23,24 @@ The custom-built PyQt6 Ground Control Station (GCS) provides a fully integrated 
 
 ## 🚀 Live Flight Simulation Demo
 
-Here is a demonstration of the manual flight mode in action. Notice the seamless real-time synchronization between keyboard inputs (`W, A, S, D`), the STM32 6DoF physics calculations, the 3D digital twin rotation, and the tactical radar tracking:
+Below is a live demonstration of the manual flight mode in action. Notice the seamless real-time synchronization between keyboard inputs (`W, A, S, D`), the STM32 6DoF physics calculations, the 3D digital twin rotation, and the tactical radar tracking:
 
 ![Flight Demo GIF](Docs/Assets/GUI_Example.gif)
 
 ---
 
-## Key Features
+## Key Engineering Features
 
-* **Dual-Loop Real-Time Architecture (STM32):**
-  * **Inner Attitude Loop (1000 Hz):** Handles high-frequency PID stabilization for Roll, Pitch, and Yaw using hardware timer interrupts (`TIM6`).
-  * **Outer Navigation Loop (100 Hz):** Computes spatial positioning and velocity vectors.
-* **Rigid-Body 6DoF Physics Engine (`physics.c`):** 
-  * Implements full rigid-body dynamics, considering mass moments of inertia, tilt-based horizontal coupling ($X, Y, Z$ accelerations derived from thrust and attitude vectors), and simulated aerodynamic drag/friction.
-* **Asynchronous Communication Protocol:**
-  * Uses a robust, non-blocking key-value string protocol (`KEY:val,KEY:val...\n`) over USB CDC for telemetry downlinking and PID/mode configuration uplinking.
-* **Custom PyQt6 GCS (Ground Control Station):**
-  * **Tactical Top-Down Trajectory Radar ($X-Y$ plane):** Features dynamic auto-centering and real-time path tracking.
-  * **3D OpenGL Digital Twin Viewer:** Real-time 6DoF wireframe rendering that updates dynamically based on live orientation and spatial translation.
-  * **Industrial Dark Aerospace UI:** Custom styling optimized for engineering monitoring.
+* **Real-Time Dual-Loop Control Architecture (STM32):**
+  * **Inner Attitude Loop (1000 Hz):** Handles high-frequency PID stabilization for vehicle orientation using hardware timer interrupts (`TIM6`).
+  * **Outer Navigation Loop (100 Hz):** Computes spatial positioning and velocity vectors relative to coordinate setpoints.
+* **Rigid-Body Newton-Euler Physics Engine (`physics.c`):** 
+  * Implements deterministic rigid-body dynamics, resolving mass moments of inertia, tilt-based horizontal coupling ($X, Y, Z$ accelerations derived from thrust and attitude vectors), and simulated aerodynamic drag.
+* **Asynchronous Key-Value Communication Protocol:**
+  * Employs a robust, non-blocking string protocol (`KEY:val,KEY:val...\n`) over USB CDC, ensuring jitter-free telemetry downlinking and parameter uplinking.
+* **High-Performance PyQt6 GCS (Ground Control Station):**
+  * **Tactical Top-Down Trajectory Radar ($X-Y$ plane):** Features dynamic auto-centering and real-time path tracking using `PyQtGraph`.
+  * **3D OpenGL Digital Twin Viewer:** Real-time spatial wireframe rendering mitigating gimbal lock via explicit $4x4$ rigid transformation matrices (`QMatrix4x4`).
 
 ---
 
@@ -49,7 +48,7 @@ Here is a demonstration of the manual flight mode in action. Notice the seamless
 
 ```text
 +-----------------------+              USB CDC (Virtual COM)              +---------------------------+
-|                       |  Telemetry (R, P, Z, X, Y, Ref)                 |                           |
+|                       |  Telemetry (R, P, Z, X, Y,, Yaw, Ref)           |                           |
 |   STM32 Controller    | ----------------------------------------------> |      PyQt6 GCS (PC)       |
 |  (Firmware / C)       |                                                 |  - Tactical X-Y Radar     |
 |                       |  Commands (SET:x,y,z / Key Input)               |  - 3D OpenGL Twin Viewer  |
@@ -96,17 +95,17 @@ Here is a demonstration of the manual flight mode in action. Notice the seamless
     └── telemetry_core.py            # Serial communication thread & parser
 ```
 
-## Project Structure
+## Getting Started
 
-1. Firmware Setup
-  * Open the firmware_hil_drone project in STM32CubeIDE.
-  * Build and flash the firmware onto your target STM32 board (optimized for STM32G4 series).
-  * Ensure USB Device CDC is active in the project configurations.
+### 1. Firmware Setup
+1. Open the `firmware_hil_drone` project in **STM32CubeIDE**.
+2. Build and flash the firmware onto your target STM32 board (optimized for the STM32G4 series).
+3. Ensure the USB Device CDC peripheral is active in the project configuration.
 
-2. Ground Control Station Setup
-  * Navigate to the desktop application directory:
+### 2. Ground Control Station Setup
+1. Navigate to the desktop application directory:
 ```
-cd desktop_application
+   cd desktop_application
 ```
   * Install the required dependencies:
 ```
@@ -122,7 +121,8 @@ python main.py
 * **W / S:** Adjust Forward / Backward spatial target ($X$-axis).
 * **A / D:** Adjust Left / Right spatial target ($Y$-axis).
 * **R / F:** Adjust Up / Down altitude target ($Z$-axis).
+* **Q / E:** Adjust X-Y Orientation target (Yaw).
 
 ## License
 
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. See **LICENSE** for more information.
