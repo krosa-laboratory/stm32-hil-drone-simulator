@@ -5,6 +5,7 @@
  *      Author: kevin
  */
 
+#include "math.h"
 #include "control.h"
 #include "pid.h"
 #include "mixer.h"
@@ -104,8 +105,14 @@ void TIM6_DAC_IRQHandler(void)
 			if(desire_U1 < 0.0f) desire_U1 = 0.0f;
 			else if(desire_U1 > max_U1) desire_U1 = max_U1;
 			// X & Y Navigation
-			desire_state.pitch =  PID_Compute(&pid_x, desire_state.x, actual_state.x, NAV_DT);
-			desire_state.roll  = -PID_Compute(&pid_y, desire_state.y, actual_state.y, NAV_DT);
+			float u_x_global = PID_Compute(&pid_x, desire_state.x, actual_state.x, NAV_DT);
+			float u_y_global = PID_Compute(&pid_y, desire_state.y, actual_state.y, NAV_DT);
+			// X & Y yaw compensation
+			float cos_yaw = cosf(actual_state.yaw);
+			float sin_yaw = sinf(actual_state.yaw);
+			// Trigonometric projection with the compensation in X & Y
+			desire_state.pitch = (u_x_global * cos_yaw + u_y_global * sin_yaw);
+			desire_state.roll  = (u_x_global * sin_yaw - u_y_global * cos_yaw);
 		}
 
 		// Motors delay

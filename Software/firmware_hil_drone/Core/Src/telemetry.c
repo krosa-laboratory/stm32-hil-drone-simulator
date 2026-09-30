@@ -31,12 +31,13 @@ void Telemetry_SendState(const FlightState_t* actual, const FlightState_t* desir
 
 	// Format the message in CSV Serial Plotter compatible
 	int len = snprintf(tx_buffer, sizeof(tx_buffer),
-			"R:%.2f,R_ref:%.2f,P:%.2f,P_ref:%.2f,Z:%.2f,U1:%.2f,X:%.2f,X_ref:%.2f,Y:%.2f,Y_ref:%.2f\r\n",
+			"R:%.2f,R_ref:%.2f,P:%.2f,P_ref:%.2f,Z:%.2f,U1:%.2f,X:%.2f,X_ref:%.2f,Y:%.2f,Y_ref:%.2f,YAW:%.2f\r\n",
 			actual->roll, desire->roll,
 			actual->pitch, desire->pitch,
 			actual->z, u1,
 			actual->x, desire->x,
-			actual->y, desire->y
+			actual->y, desire->y,
+			actual->yaw
 			);
 
 	// Asynchronous transmission if the message is correct
@@ -64,6 +65,8 @@ void Telemetry_ProcessCommands(FlightState_t* desire)
             case 'd': case 'D': desire->y -= 1.0f; break; // Right
             case 'r': case 'R': desire->z += 1.0f; break; // Up
             case 'f': case 'F': desire->z -= 1.0f; break; // Down
+            case 'q': case 'Q': desire->yaw -= 0.087266f; break; // Rotate -5º in rad
+			case 'e': case 'E': desire->yaw += 0.087266f; break; // Rotate +5º in rad
         }
         rx_command = 0; // Empty the incoming command once processed
     }

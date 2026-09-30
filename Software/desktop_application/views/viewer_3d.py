@@ -45,16 +45,18 @@ class Drone3DViewer:
 
     def updateModel(self, data):
         """Transforms radians to degrees and redraws the 3D model."""
-        roll_deg  = data.get('R', 0.0) * (180.0 / math.pi)
-        pitch_deg = data.get('P', 0.0) * (180.0 / math.pi)
+        roll_deg  = data.get('R', 0.0)   * (180.0 / math.pi)
+        pitch_deg = data.get('P', 0.0)   * (180.0 / math.pi)
+        yaw_deg   = data.get('YAW', 0.0) * (180.0 / math.pi)
         pos_x     = data.get('X', 0.0)
         pos_y     = data.get('Y', 0.0)
         alt_z     = data.get('Z', 0.0)
 
         drone_matrix = QMatrix4x4()
         drone_matrix.translate(pos_x, pos_y, alt_z)
-        drone_matrix.rotate(roll_deg, 1, 0, 0)
+        drone_matrix.rotate(yaw_deg, 0, 0, 1)
         drone_matrix.rotate(pitch_deg, 0, 1, 0)
+        drone_matrix.rotate(roll_deg, 1, 0, 0)
         self.drone_model.setTransform(drone_matrix)
 
         grid_matrix = QMatrix4x4()

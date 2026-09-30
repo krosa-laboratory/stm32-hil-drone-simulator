@@ -1,4 +1,4 @@
-import collections
+import collections, math
 from PyQt6.QtWidgets import QVBoxLayout
 import pyqtgraph as pg
 
@@ -26,7 +26,8 @@ class PlotManager:
             'X':     collections.deque(maxlen=self.history_len),
             'X_ref': collections.deque(maxlen=self.history_len),
             'Y':     collections.deque(maxlen=self.history_len),
-            'Y_ref': collections.deque(maxlen=self.history_len)
+            'Y_ref': collections.deque(maxlen=self.history_len),
+            'YAW': collections.deque(maxlen=self.history_len)
         }
 
         # Plot 1: Roll
@@ -63,6 +64,9 @@ class PlotManager:
         self.scatter_ref = pg.ScatterPlotItem(size=10, pen=pg.mkPen('#ffff00', width=2), symbol='x')
         self.plot_xy.addItem(self.scatter_ref)
 
+        self.heading_line = pg.PlotDataItem(pen=pg.mkPen('#ff0000', width=3))
+        self.plot_xy.addItem(self.heading_line)
+
         self.container.layout().addWidget(self.plot_xy)
 
     def updateData(self, data):
@@ -76,6 +80,7 @@ class PlotManager:
         self.data_history['X_ref'].append(data.get('X_ref', 0.0))
         self.data_history['Y'].append(data.get('Y', 0.0))
         self.data_history['Y_ref'].append(data.get('Y_ref', 0.0))
+        self.data_history['YAW'].append(data.get('YAW', 0.0))
 
         self.curve_roll.setData(list(self.data_history['R']))
         self.curve_roll_ref.setData(list(self.data_history['R_ref']))
@@ -95,8 +100,13 @@ class PlotManager:
         if x_list and y_list:
             current_x = x_list[-1]
             current_y = y_list[-1]
+            current_yaw = self.data_history['YAW'][-1]
 
             self.scatter_current.setData([current_x], [current_y])
+
+            nose_x = current_x + 0.5 * math.cos(current_yaw)
+            nose_y = current_y + 0.5 * math.sin(current_yaw)
+            self.heading_line.setData([current_x, nose_x], [current_y, nose_y])
 
             span = 5.0 
             self.plot_xy.setXRange(current_x - span, current_x + span)

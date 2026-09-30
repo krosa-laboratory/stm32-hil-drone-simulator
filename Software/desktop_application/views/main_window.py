@@ -78,7 +78,7 @@ class AdvancedGCS(QMainWindow):
 
     def handleKeypress(self, event):
         key = event.text().upper()
-        if key in ['W', 'A', 'S', 'D', 'R', 'F']:
+        if key in ['W', 'A', 'S', 'D', 'R', 'F', 'Q', 'E']:
             self.telemetry.send_command(key)
 
     def closeEvent(self, event):
