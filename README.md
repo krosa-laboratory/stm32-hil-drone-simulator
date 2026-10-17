@@ -109,7 +109,7 @@ Below is a live demonstration of the manual flight mode in action. Notice the se
 ```
   * Install the required dependencies:
 ```
-pip install pyqt6 pyqtgraph pyopengl numpy pyserial
+pip install PyQt6==6.4.2 pyqtgraph==0.14.0 PyOpenGL==3.1.10 numpy==2.2.6 pyserial==3.5
 ```
   * Run the GCS application:
 ```
